@@ -57,7 +57,7 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const query = "sdfhsr";
+  const query = "inception";
 
   useEffect(function () {
     async function fetchMovies() {
