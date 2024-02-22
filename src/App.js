@@ -76,7 +76,7 @@ export default function App() {
       try {
         setIsLoading(true);
         const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${tempQuery}`
+          `https://www.omdbapi.com/?apikey=${KEY}&s=${tempQuery}`
         );
 
         if (!res.ok)
@@ -230,15 +230,15 @@ function MovieList({ movies }) {
   return (
     <ul className="list">
       {movies?.map((movie) => (
-        <Movie movie={movie} />
+        <Movie movie={movie} key={movie.imdbID} />
       ))}
     </ul>
   );
 }
 
-function Movie({ movie }) {
+function Movie({ movie, key }) {
   return (
-    <li key={movie.imdbID}>
+    <li key={key}>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />
       <h3>{movie.Title}</h3>
       <div>
