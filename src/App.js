@@ -59,7 +59,7 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [selectedId, setSelectedId] = useState("null");
+  const [selectedId, setSelectedId] = useState(null);
 
   // useEffect(function () {
   //   console.log("After initial render");
@@ -78,9 +78,13 @@ export default function App() {
 
   // console.log("During render");
 
-  function handleSelectMovie({ selectedId }) {
-    console.log(selectedId);
-    setSelectedId(selectedId);
+  function handleSelectMovie(id) {
+    console.log(id);
+    setSelectedId((selectedId) => (id === selectedId ? null : id));
+  }
+
+  function handleCloseMovie(selectedId) {
+    setSelectedId(null);
   }
 
   useEffect(
@@ -144,7 +148,10 @@ export default function App() {
         </Box>
         <Box>
           {selectedId ? (
-            <MovaieDetails selectedId={selectedId} />
+            <MovaieDetails
+              selectedId={selectedId}
+              onHandleCloseMovie={handleCloseMovie}
+            />
           ) : (
             <>
               <WatchedSummary watched={watched} />
@@ -259,7 +266,7 @@ function Box({ children }) {
 
 function MovieList({ movies, onSelectMovie }) {
   return (
-    <ul className="list">
+    <ul className="list list-movies">
       {movies?.map((movie) => (
         <Movie movie={movie} key={movie.imdbID} onSelectMovie={onSelectMovie} />
       ))}
@@ -282,8 +289,15 @@ function Movie({ movie, onSelectMovie }) {
   );
 }
 
-function MovaieDetails({ selectedId }) {
-  return <div className="details">{selectedId}</div>;
+function MovaieDetails({ selectedId, onHandleCloseMovie }) {
+  return (
+    <div className="details">
+      <button className="btn-back" onClick={onHandleCloseMovie}>
+        &larr;
+      </button>
+      {selectedId}
+    </div>
+  );
 }
 
 function WatchedSummary({ watched }) {
