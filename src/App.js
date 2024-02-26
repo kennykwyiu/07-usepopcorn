@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import StarRating from "./StarRating";
 
 const tempMovieData = [
   {
@@ -296,11 +297,11 @@ function MovaieDetails({ selectedId, onHandleCloseMovie }) {
     Year: year,
     Poster: poster,
     Runtime: runtime,
-    imdbRating: imdbRating,
+    imdbRating,
     Plot: plot,
     Release: release,
     Actors: actors,
-    Directors: directors,
+    Director: director,
     Genre: genre,
   } = movie;
 
@@ -331,9 +332,23 @@ function MovaieDetails({ selectedId, onHandleCloseMovie }) {
           <p>
             {release} &bull; {runtime}
           </p>
+          <p>{genre}</p>
+          <p>
+            <span>⚜️</span>
+            {imdbRating} IMDb rating
+          </p>
         </div>
-        {selectedId}
       </header>
+      <section>
+        <div className="rating">
+          <StarRating maxRating={10} size={24} />
+        </div>
+        <p>
+          <em>{plot}</em>
+        </p>
+        <p>Starring {actors}</p>
+        <p>Directed by {director}</p>
+      </section>
     </div>
   );
 }
