@@ -298,6 +298,8 @@ function Movie({ movie, onSelectMovie }) {
 function MovaieDetails({ selectedId, onHandleCloseMovie, onAddWatched }) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [userRating, setUserRating] = useState("");
+
   const {
     Title: title,
     Year: year,
@@ -319,8 +321,10 @@ function MovaieDetails({ selectedId, onHandleCloseMovie, onAddWatched }) {
       poster,
       imdbRating: Number(imdbRating),
       runtime: Number(runtime.split(" ").at(0)),
+      userRating,
     };
     onAddWatched(newWatchedMovie);
+    onHandleCloseMovie();
   }
 
   useEffect(
@@ -364,11 +368,17 @@ function MovaieDetails({ selectedId, onHandleCloseMovie, onAddWatched }) {
           </header>
           <section>
             <div className="rating">
-              <StarRating maxRating={10} size={24} />
+              <StarRating
+                maxRating={10}
+                size={24}
+                onSetRating={setUserRating}
+              />
 
-              <button className="btn-add" onClick={handleAdd}>
-                +Add to list
-              </button>
+              {userRating > 0 && (
+                <button className="btn-add" onClick={handleAdd}>
+                  +Add to list
+                </button>
+              )}
             </div>
             <p>
               <em>{plot}</em>
