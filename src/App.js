@@ -306,6 +306,9 @@ function MovaieDetails({
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
+  const watchedUserRating = watched.find(
+    (movie) => movie.imdbID === selectedId
+  )?.userRating;
 
   const {
     Title: title,
@@ -390,7 +393,9 @@ function MovaieDetails({
                   )}
                 </>
               ) : (
-                <p>You rated with movie</p>
+                <p>
+                  You rated with movie {watchedUserRating} <span>🤩</span>
+                </p>
               )}
             </div>
             <p>
