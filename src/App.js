@@ -54,7 +54,7 @@ const average = (arr) =>
 const KEY = "7e0e4cf3";
 
 export default function App() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("kid");
 
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
@@ -62,22 +62,22 @@ export default function App() {
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
-  useEffect(function () {
-    console.log("After initial render");
-  }, []);
+  // useEffect(function () {
+  //   console.log("After initial render");
+  // }, []);
 
-  useEffect(function () {
-    console.log("After every render");
-  });
+  // useEffect(function () {
+  //   console.log("After every render");
+  // });
 
-  useEffect(
-    function () {
-      console.log("D");
-    },
-    [query]
-  );
+  // useEffect(
+  //   function () {
+  //     console.log("D");
+  //   },
+  //   [query]
+  // );
 
-  console.log("During render");
+  // console.log("During render");
 
   function handleSelectMovie(id) {
     console.log(id);
@@ -358,6 +358,14 @@ function MovaieDetails({
       getMovieDetails();
     },
     [selectedId]
+  );
+
+  useEffect(
+    function () {
+      if (!title) return;
+      document.title = `Movie | ${title}`;
+    },
+    [title]
   );
 
   return (
