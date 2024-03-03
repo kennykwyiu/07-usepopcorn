@@ -54,7 +54,7 @@ const average = (arr) =>
 const KEY = "7e0e4cf3";
 
 export default function App() {
-  const [query, setQuery] = useState("kid");
+  const [query, setQuery] = useState("");
 
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
@@ -119,6 +119,7 @@ export default function App() {
           setError("");
         } catch (error) {
           if (error.name !== "AbotyError") {
+            console.log(error.message);
             setError(error.message);
           }
         } finally {
@@ -131,6 +132,7 @@ export default function App() {
         setError("");
         return;
       }
+      handleCloseMovie();
       fetchMovies();
 
       return function () {
