@@ -96,15 +96,6 @@ export default function App() {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
 
-  useEffect(function () {
-    document.addEventListener("keydown", function (e) {
-      if (e.code === "Escape") {
-        handleCloseMovie();
-        console.log("CLOSING");
-      }
-    });
-  });
-
   useEffect(
     function () {
       const controller = new AbortController();
@@ -176,7 +167,7 @@ export default function App() {
         </Box>
         <Box>
           {selectedId ? (
-            <MovaieDetails
+            <MovieDetails
               selectedId={selectedId}
               onHandleCloseMovie={handleCloseMovie}
               onAddWatched={handleAddWatched}
@@ -322,7 +313,7 @@ function Movie({ movie, onSelectMovie }) {
   );
 }
 
-function MovaieDetails({
+function MovieDetails({
   selectedId,
   onHandleCloseMovie,
   onAddWatched,
@@ -362,6 +353,23 @@ function MovaieDetails({
     onAddWatched(newWatchedMovie);
     onHandleCloseMovie();
   }
+
+  useEffect(
+    function () {
+      function callback(e) {
+        if (e.code === "Escape") {
+          onHandleCloseMovie();
+          console.log("CLOSING");
+        }
+      }
+      document.addEventListener("keydown", callback);
+
+      return function () {
+        document.removeEventListener("keydown", callback);
+      };
+    },
+    [onHandleCloseMovie]
+  );
 
   useEffect(
     function () {
