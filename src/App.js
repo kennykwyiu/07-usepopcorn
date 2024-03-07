@@ -294,10 +294,10 @@ function MovieDetails({
   // );
 
   // if wanna have true value is isTop, need to be as below
-  const isTop = imdbRating > 8;
-  console.log(isTop);
+  // const isTop = imdbRating > 8;
+  // console.log(isTop);
 
-  const [avgRating, setAvgRating] = useState(0);
+  // const [avgRating, setAvgRating] = useState(0);
 
   function handleAdd() {
     const newWatchedMovie = {
@@ -310,9 +310,9 @@ function MovieDetails({
       userRating,
     };
     onAddWatched(newWatchedMovie);
-    // onHandleCloseMovie();
-    setAvgRating(Number(imdbRating));
-    setAvgRating((avgRating) => (avgRating + userRating) / 2);
+    onHandleCloseMovie();
+    // setAvgRating(Number(imdbRating));
+    // setAvgRating((avgRating) => (avgRating + userRating) / 2);
     // alert(avgRating);
   }
 
@@ -386,7 +386,7 @@ function MovieDetails({
             </div>
           </header>
 
-          <p>{avgRating}</p>
+          {/* <p>{avgRating}</p> */}
 
           <section>
             <div className="rating">
