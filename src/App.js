@@ -278,11 +278,24 @@ function MovieDetails({
     Genre: genre,
   } = movie;
 
-  /* eslint-disable */
+  // /* eslint-disable */
   // produce the problem
   // if (imdbRating > 8) [isTop, setIsTop] = useState(true);
-
   // if (imdbRating > 8) return <p>Greatest ever!</p>;
+
+  // const [isTop, setIsTop] = useState(imdbRating > 8);
+  // console.log(isTop); // it's still false, due to initial render is false
+
+  // useEffect(
+  //   function () {
+  //     setIsTop(imdbRating > 8);
+  //   },
+  //   [imdbRating]
+  // );
+
+  // if wanna have true value is isTop, need to be as below
+  const isTop = imdbRating > 8;
+  console.log(isTop);
 
   function handleAdd() {
     const newWatchedMovie = {
